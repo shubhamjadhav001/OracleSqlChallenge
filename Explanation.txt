@@ -1,0 +1,104 @@
+-- Creating Department table
+
+CREATE TABLE department (
+Department_Id number(5) NOT NULL,
+Department_Name varchar2(50) NOT NULL,
+Location varchar2(50) NOT NULL
+);
+
+--Inserting records into table as per appendix
+
+INSERT into department(Department_Id, Department_Name, Location) VALUES (1,'Management','London');
+INSERT into department(Department_Id, Department_Name, Location) VALUES (2,'Engineering','Cardiff');
+INSERT into department(Department_Id, Department_Name, Location) VALUES (3,'Research & Engineering','London');
+INSERT into department(Department_Id, Department_Name, Location) VALUES (4,'Sales','Belfast');
+
+
+-- YOU CAN ALSO USE 'INSERT INTO department SELECT 1,'MANAGEMENT','CARDIFF' FROM DUAL UNION ALL' to perform same operation
+
+
+--show table
+SELECT * from Department;
+
+
+
+-- Creating Employee table
+
+CREATE TABLE employee (
+Employee_Id number(10) NOT NULL,
+Employee_Name varchar2(50) NOT NULL,
+Job_Title varchar2(50) NOT NULL,
+Manager_Id number(10),
+Date_Hired DATE NOT NULL,
+Salary number(10) NOT NULL,
+Department_Id number(5) NOT NULL
+);
+
+
+--Inserting records into table as per appendix
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES (90001,'John Smith','CEO','', '01-Jan-1995', 100000, 1);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES (90002,'Jimmy Willis','Manager', 90001, '23-Sep-2003', 52500, 4);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES (90003,'Roxy Jones', 'Salesperson', 90002, '11-Feb-2017', 35000, 4);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90004,'Selwyn Field', 'Salesperson', 90003, '20-May-2015', 32000, 4);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90005,'David Hallett', 'Engineer', 90006, '17-Apr-2018', 40000, 2);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90006, 'Sarah Phelps', 'Manager', 90001, '21-Mar-2015', 45000, 2);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90007, 'Louise Harper', 'Engineer', 90006, '01-Jan-2013', 47000, 2);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90008, 'Tina Hart', 'Engineer', 90009, '27-Jul-2014', 45000, 3);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90009, 'Gus Jones', 'Manager', 90001, '15-May-2018', 50000, 3);
+
+INSERT into employee (Employee_Id, Employee_name, Job_Title, Manager_Id, Date_Hired, Salary, Department_Id)
+  VALUES(90010, 'Mildred Hall', 'Secretary', 90001, '12-Oct-1996', 35000, 1);
+
+--Show table
+SELECT * from employee; 
+
+-- Increase salary of an employees by 5% (Increased salary of 'Jimmy Willis' employee_id 90002 by 5%)
+Update employee
+SET salary = salary*1.05
+WHERE EMPLOYEE_ID = 90002;
+
+
+
+--Transfer of an employee to different department(transfering 'Selwyn Field' employee_id 90004 to management department)
+UPDATE employee
+SET Department_ID = 1
+WHERE Employee_ID = 90004;
+
+
+--Show table
+SELECT * from employee; 
+
+
+-- Returning salary of an employee (employee_id 90002)
+SELECT salary
+FROM employee
+WHERE Employee_ID = 90002;
+
+
+-- Showing all employees working for Sales Department 
+SELECT Employee_Name
+FROM employee
+WHERE department_id = 4;
+
+
+-- Showing total salary of employees in all departments
+SELECT Department_Id, SUM(SALARY) FROM employee GROUP BY Department_Id;
+
