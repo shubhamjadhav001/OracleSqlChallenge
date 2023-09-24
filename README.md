@@ -4,5 +4,6 @@ In this repository a SQL file is included which is solution for the oracle codin
 
 Instructions
 1. Create or use any oracle database of your choice.
-2. import .sql file and run commands.
-3. this will create two tables employee and department.
+2. import .sql file or copy the code and run.
+
+This will create two tables employee and department. Detailed explaination is in text file attached. 
